@@ -2,8 +2,10 @@ class CatImg extends HTMLElement {
   constructor() {
     super();
 
-    this.width = this.getAttribute('width') || 200;
-    this.height = this.getAttribute('height') || 200;
+    this.width =
+      +this.getAttribute('width') >= 100 ? this.getAttribute('width') : 200;
+    this.height =
+      +this.getAttribute('height') >= 100 ? this.getAttribute('height') : 200;
 
     this.build();
   }
@@ -15,20 +17,19 @@ class CatImg extends HTMLElement {
   }
 
   async refresh() {
-    
     const styles = this.createStyles();
     const container = this.createContainer();
 
-    container.innerHTML = 'Carregando...';
-    
+    container.innerHTML = '<p>Carregando...</p>';
+
     this.shadow.innerHTML = '';
     this.shadow.appendChild(styles);
     this.shadow.appendChild(container);
-    
+
     const img = await this.createImage();
-    
+
     container.innerHTML = '';
-    container.appendChild(img)
+    container.appendChild(img);
 
     this.shadow.appendChild(styles);
     this.shadow.appendChild(container);
@@ -36,23 +37,32 @@ class CatImg extends HTMLElement {
 
   createStyles() {
     const styles = document.createElement('style');
-    
+
     styles.textContent = `
       .container {
-        display: flex;
+        display: block;
+        margin: auto;
         overflow: hidden;
         min-width: 100px;
         min-height: 100px;
         max-width: ${this.width}px;
         max-height: ${this.height}px;
-        align-items: center;
-        justify-content: center;
         border: 3px solid black;
       }
 
       .image {
-        max-width: 100%;
-        max-height: 100%;
+        display: block;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+      }
+
+      p {
+        display: block;
+        margin: auto;
+        line-height: calc(100px - 6px);
+        width: 100%;
+        text-align: center;
       }
     `;
 
