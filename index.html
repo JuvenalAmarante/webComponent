@@ -4,11 +4,79 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Web Componet Test</title>
+    <title>Web Component Test</title>
   </head>
   <body>
-    <cat-img id="component" width="500" height="500"></cat-img>
+    <div class="container">
+      <h1>Web Component Test</h1>
+
+      <cat-img id="component" width="400" height="400"></cat-img>
+
+      <div class="container-button">
+        <button onclick="refresh()">Next</button>
+      </div>
+    </div>
 
     <script src="CatImg.js"></script>
+    <script>
+      function refresh() {
+        colors = [
+          'grey',
+          'red',
+          'green',
+          'yellow',
+          'blue',
+          'pink',
+          'purple',
+          'antiquewhite',
+          'white',
+          'orange',
+        ];
+
+        document.getElementById('component').refresh();
+
+        document.body.setAttribute(
+          'style',
+          `background-color: ${colors[parseInt(Math.random() * 10)]}`
+        );
+      }
+    </script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      .container {
+        padding-top: 15px;
+        width: 100vw;
+        height: calc(100vh - 15px);
+        text-align: center;
+      }
+
+      .container-button {
+        bottom: 40px;
+        text-align: center;
+        position: absolute;
+        width: 100%;
+      }
+
+      button {
+        width: 90px;
+        height: 90px;
+
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+
+        background-color: chartreuse;
+
+        cursor: pointer;
+
+        border-radius: 50%;
+        border: grey solid 0.5px;
+      }
+    </style>
   </body>
 </html>
