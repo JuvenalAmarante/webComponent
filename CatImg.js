@@ -7,16 +7,16 @@ class CatImg extends HTMLElement {
     this.height =
       +this.getAttribute('height') >= 100 ? this.getAttribute('height') : 200;
 
+    this.init();
+  }
+
+  init() {
+    this.shadow = this.attachShadow({ mode: 'open' });
+
     this.build();
   }
 
-  build() {
-    this.shadow = this.attachShadow({ mode: 'open' });
-
-    this.refresh();
-  }
-
-  async refresh() {
+  async build() {
     const styles = this.createStyles();
     const container = this.createContainer();
 
@@ -85,6 +85,7 @@ class CatImg extends HTMLElement {
 
     return image;
   }
+
   async getImage() {
     try {
       const retorno = await (
